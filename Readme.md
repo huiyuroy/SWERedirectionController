@@ -1,3 +1,3 @@
 **SWERedirectionController**
 
-- source code is comming soon
+- source code is coming soon
