@@ -1,3 +1,3 @@
 **SWERedirectionController**
 
-- source code is coming soon
+- The source code will be released upon paper acceptance.
