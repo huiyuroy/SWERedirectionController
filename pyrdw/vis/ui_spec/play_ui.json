@@ -1,0 +1,317 @@
+{
+  "DRL_Render_Screen": {
+    "title": "DRL-RDW Train and Eval Window",
+    "width": 1900,
+    "height": 960,
+    "areas": {
+      "phy_area": {
+        "loc": [
+          10,
+          30,
+          920,
+          920
+        ]
+      },
+      "vir_area": {
+        "loc": [
+          935,
+          30,
+          910,
+          920
+        ]
+      },
+      "console_area": {
+        "loc": [
+          945,
+          545,
+          890,
+          400
+        ]
+      }
+    },
+    "fix_labels": {
+      "phy_label": {
+        "loc": [
+          10,
+          5
+        ],
+        "text": "Physical Space"
+      },
+      "vir_label": {
+        "loc": [
+          935,
+          5
+        ],
+        "text": "Virtual Space"
+      },
+      "vpre_label": {
+        "loc": [
+          945,
+          35
+        ],
+        "text": "Virtual Preview"
+      },
+      "vobs_label": {
+        "loc": [
+          1425,
+          35
+        ],
+        "text": "Virtual Observation"
+      },
+      "console_label": {
+        "loc": [
+          945,
+          520
+        ],
+        "text": "Log"
+      }
+    },
+    "var_labels": {
+      "pre_train_label": {
+        "loc": [
+          950,
+          550
+        ],
+        "text": "Previous Train Info"
+      },
+      "pre_train_index_label": {
+        "loc": [
+          960,
+          570
+        ],
+        "text": "- Index: {}"
+      },
+      "pre_train_total_rwd_label": {
+        "loc": [
+          960,
+          590
+        ],
+        "text": "- Total Rwd: {0:.3f}"
+      },
+      "pre_train_mean_ls_label": {
+        "loc": [
+          960,
+          610
+        ],
+        "text": "- Mean Loss: {0:.3f}"
+      },
+      "pre_train_total_step_label": {
+        "loc": [
+          960,
+          630
+        ],
+        "text": "- Total Step: {}"
+      },
+      "cur_train_label": {
+        "loc": [
+          950,
+          660
+        ],
+        "text": "Current Train Info"
+      },
+      "cur_train_index_label": {
+        "loc": [
+          960,
+          680
+        ],
+        "text": "- Index: {}"
+      },
+      "cur_train_step_label": {
+        "loc": [
+          960,
+          700
+        ],
+        "text": "- Step: {}"
+      },
+      "cur_train_step_rwd_label": {
+        "loc": [
+          960,
+          720
+        ],
+        "text": "- Step Rwd: {0:.3f}"
+      },
+      "cur_train_step_ls_label": {
+        "loc": [
+          960,
+          740
+        ],
+        "text": "- Step Ls: {0:.3f}"
+      },
+      "cur_train_total_rwd_label": {
+        "loc": [
+          960,
+          760
+        ],
+        "text": "- Toal Rwd: {0:.3f}"
+      },
+      "general_train_label": {
+        "loc": [
+          950,
+          790
+        ],
+        "text": "General Train Info"
+      },
+      "gen_train_max_step_rwd_label": {
+        "loc": [
+          960,
+          810
+        ],
+        "text": "- Max Step Rwd: {0:.3f}"
+      },
+      "gen_train_max_total_rwd_label": {
+        "loc": [
+          960,
+          830
+        ],
+        "text": "- Max Total Rwd: {0:.3f}"
+      },
+      "gen_train_fps_label": {
+        "loc": [
+          960,
+          850
+        ],
+        "text": "- FPS: {0:.1f}"
+      },
+      "cur_rdw_label": {
+        "loc": [
+          1175,
+          550
+        ],
+        "text": "Current RDW Info"
+      },
+      "cur_rdw_alg_label": {
+        "loc": [
+          1185,
+          570
+        ],
+        "text": "- cur alg: "
+      },
+      "cur_rdw_state_label": {
+        "loc": [
+          1185,
+          590
+        ],
+        "text": "- cur state: "
+      },
+      "cur_rdw_rot_gain_label": {
+        "loc": [
+          1185,
+          610
+        ],
+        "text": "- gr: {0:.2f}/{1:.2f} [{2:.2f}, {3:.2f}]"
+      },
+      "cur_rdw_trans_gain_label": {
+        "loc": [
+          1185,
+          630
+        ],
+        "text": "- gt: {0:.2f}/{1:.2f} [{2:.2f}, {3:.2f}]"
+      },
+      "cur_rdw_curv_gain_label": {
+        "loc": [
+          1185,
+          650
+        ],
+        "text": "- gc: {0:.2f}/{1:.2f} [{2:.2f}, {3:.2f}]"
+      },
+      "cur_rdw_mov_vel_label": {
+        "loc": [
+          1185,
+          670
+        ],
+        "text": "- vel p v : {0:.2f} m/s {1:.2f} m/s"
+      },
+      "cur_rdw_rot_vel_label": {
+        "loc": [
+          1185,
+          690
+        ],
+        "text": "- rot p v: {0:.2f} d/s {1:.2f} d/s"
+      },
+      "cur_rdw_vel_rate_label": {
+        "loc": [
+          1185,
+          710
+        ],
+        "text": "- rdw vel rate: {0:.2f} m/s"
+      },
+      "cur_rdw_rot_rate_label": {
+        "loc": [
+          1185,
+          730
+        ],
+        "text": "- rdw rot rate: {0:.2f} d/s"
+      },
+      "cur_rdw_reset_type_label": {
+        "loc": [
+          1185,
+          750
+        ],
+        "text": "- cur reset type: "
+      },
+      "cur_rdw_reset_num_label": {
+        "loc": [
+          1185,
+          770
+        ],
+        "text": "- cur reset num: {}"
+      },
+      "cur_walk_label": {
+        "loc": [
+          1445,
+          550
+        ],
+        "text": "Current Walking Info"
+      },
+      "cur_walk_v_size_label": {
+        "loc": [
+          1455,
+          570
+        ],
+        "text": "- vir space size: {0:.1f} * {1:.1f}"
+      },
+      "cur_walk_p_size_label": {
+        "loc": [
+          1455,
+          590
+        ],
+        "text": "- phy space size: {0:.1f} * {1:.1f}"
+      },
+      "cur_walk_traj_type_label": {
+        "loc": [
+          1455,
+          610
+        ],
+        "text": "- traj type: "
+      },
+      "cur_walk_traj_index_label": {
+        "loc": [
+          1455,
+          630
+        ],
+        "text": "- cur traj id: {}/{}"
+      },
+      "cur_walk_tar_index_label": {
+        "loc": [
+          1455,
+          650
+        ],
+        "text": "- cur tar id: {}/{}"
+      },
+      "cur_walk_total_reset_label": {
+        "loc": [
+          1455,
+          670
+        ],
+        "text": "- total reset num: {}"
+      },
+      "cur_walk_max_epi_reset_label": {
+        "loc": [
+          1455,
+          690
+        ],
+        "text": "- max epi reset num: {}"
+      }
+    }
+  }
+}
