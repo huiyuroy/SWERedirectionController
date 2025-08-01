@@ -91,5 +91,5 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 ## Contact
 
 - Project Lead: Huiyu Li (huiyuroy@163.com)
-- Corresponding Author: Linwei Fan (hyfan129@163.com)
+- Corresponding Author: Linwei Fan (lwfan129@163.com)
 - Affiliation: Shandong University of Finance and Economics
