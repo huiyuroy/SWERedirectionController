@@ -1,10 +1,10 @@
 # SWERedirectionController
 
-[![DOI](https://img.shields.io/badge/DOI-10.1109%2FTVCG.2024.3409734-blue)](https://doi.org/10.1109/TVCG.2025.3595181)
+[![DOI](https://img.shields.io/badge/DOI-10.1109%2FTVCG.2025.3595181-blue)](https://doi.org/10.1109/TVCG.2025.3595181)
 
 A Deep Reinforcement Learning (DRL) based spatial walkability-aware redirection controller that guides users toward safer and more walkable physical areas using the innovative Spatial Walkability Entropy (SWE) metric, effectively enhancing obstacle avoidance capabilities in virtual reality environments.
 
-> Li, H., Ding, Y., He, Y., Fan, L., & Xu, X. (2024). Towards Walkable and Safe Areas: DRL-Based Redirected Walking Leveraging Spatial Walkability Entropy. *IEEE Transactions on Visualization and Computer Graphics*.
+> Li, H., Ding, Y., He, Y., Fan, L., & Xu, X. (2025). Towards Walkable and Safe Areas: DRL-Based Redirected Walking Leveraging Spatial Walkability Entropy. *IEEE Transactions on Visualization and Computer Graphics*.
 
 ## Key Features
 
