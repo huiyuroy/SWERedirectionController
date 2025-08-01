@@ -33,24 +33,23 @@ your_directory/
 ### 3. Space Data Preparation
 Preprocess spatial data for training and simulation:
 ```bash
-
 # Process RL scenes
-run batch_process_rl_scenes.py
+run demo/batch_process_rl_scenes.py
 
 # Process general scenes
-run batch_process_scenes.py
+run demo/batch_process_scenes.py
 ```
 
 ### 4. Run Simulation Demo
 Execute the redirection controller simulation:
 ```bash
-run swerc_simu_demo.py
+run demo/swerc_simu_demo.py
 ```
 
 ### 5. Train Custom Model (Optional)
 Train with custom configurations:
 ```bash
-run swerc_trainer.py
+run rlrdw/swerc/swerc_trainer.py
 ```
 
 ## Dataset
