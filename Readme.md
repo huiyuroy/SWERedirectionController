@@ -13,10 +13,8 @@ We provide simulation
 2. place the project folder and the dataset folder in the same directory.
 3. space data prepare:
    - run batch_process_rl_scenes.py 
-   - run batch_process_scenes.py 
-4. if the trajectories are not available
-5. 
-6. run swerc_simu_demo.py
+   - run batch_process_scenes.py
+4. run swerc_simu_demo.py
 
 ## Dataset
 To enable the simulation test/demo, the dataset is provided in:
