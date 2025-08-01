@@ -70,9 +70,6 @@ The [Polyspaces Dataset](https://github.com/huiyuroy/polyspaces) contains 57 dis
   ```
 - Full requirements: [requirements.txt](requirements.txt)
 
-## Project Structure
-
-
 
 ## Citation
 
