@@ -11,7 +11,6 @@ A Deep Reinforcement Learning (DRL) based spatial walkability-aware redirection 
 - **Spatial Walkability Entropy (SWE)**: Novel metric quantifying navigation freedom and safety in physical space
 - **DRL-based Controller**: Proximal Policy Optimization (PPO) agent with joint reward function
 - **Reset Optimization**: Regional entropy maximization strategy reducing re-collision risk
-- **Superior Performance**: Reduces physical collisions by 13.3% and extends walking distance by 12.6% vs SOTA
 - **VR Integration**: Compatible with HMD systems like PICO 4 Pro
 
 ## How to Use
@@ -89,6 +88,6 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 
 ## Contact
 
-- Project Lead: Huiyu Li (huiyuroy@163.com)
+- Develop: Huiyu Li (huiyuroy@163.com)
 - Corresponding Author: Linwei Fan (lwfan129@163.com)
 - Affiliation: Shandong University of Finance and Economics
