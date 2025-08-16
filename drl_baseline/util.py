@@ -87,12 +87,12 @@ def gym_reward_adapter(r, env_name, **kwargs):
 
 def understand_gather():
     """
-    torch.gather函数，参数列表：input, dim, index, *, sparse_grad=False, out=None
-    -输出的tensor形状与index的tensor形状一样，
-    -dim代表index中的数据直接替换input的某个dim的索引，例如dim=0，index=[[2,1,0]]。
-    -输出位output[[input[2,j1], input[1,j2], input[0,j3]]]。
-    -j1,j2,j3由2、1、0在index中的索引确定，2在index的索引index‘是(0,1)，由于2已经用于表示output的0dim，则选择index'的1dim去指代j1
-    -所以j1,j2,j3分别是0,1,2，最后为output[[input[2,0], input[1,1], input[0,2]]]
+    torch.gather function, parameter list: input, dim, index, *, sparse_grad=False, out=None
+    - The output tensor has the same shape as the index tensor
+    - dim represents that the data in index directly replaces the index of a certain dim in input, for example dim=0, index=[[2,1,0]]
+    - The output is output[[input[2,j1], input[1,j2], input[0,j3]]]
+    - j1,j2,j3 are determined by the indices of 2,1,0 in index. The index of 2 in index is (0,1). Since 2 is already used to represent the 0th dim of output, we select the 1st dim of index' to denote j1
+    - Therefore j1,j2,j3 are 0,1,2 respectively, resulting in output[[input[2,0], input[1,1], input[0,2]]]
 
 
     Returns:

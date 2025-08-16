@@ -16,28 +16,28 @@ class Tiling:
         self.corr_scene = None
         self.mat_loc: Tuple = tuple()  # row, col
         self.center: np.ndarray = np.array([0, 0])
-        self.cross_bound: np.ndarray = np.array([])  # 穿过这个tiling的边界
-        self.cross_area = np.array([])  # tiling 与场景相交的区域，仅当type=0时记录
+        self.cross_bound: np.ndarray = np.array([])  # Boundaries passing through this tiling
+        self.cross_area = np.array([])  # Area where tiling intersects with scene, only recorded when type=0
         self.rect: np.ndarray = np.array([])
         self.poly_contour: Polygon = Polygon()
         self.nei_ids: np.ndarray = np.array([])
         self.rela_patch = None
-        self.corr_conv_ids = []  # 相交的凸多边形区域id
-        self.corr_conv_cin = -1  # tiling center 所在的凸多边形区域id
+        self.corr_conv_ids = []  # Intersecting convex polygon area ids
+        self.corr_conv_cin = -1  # Convex polygon area id where tiling center is located
 
         self.vis_multi_areas = False
         self.vis_tri: Tuple[np.ndarray] = tuple()
         self.vis_poly: Tuple[Polygon] = tuple()
         self.vis_rays: Tuple[Tuple] = tuple()
-        # 以[0,1]旋转角度划分若干区域，每个区域内的可达tiling，目前将角度划分为120个区间，每个区间代表3度（见space对象）
-        self.vis_grids = tuple()  # 周围360度可见区域离散网格，1度为一个离散扇区，每个扇区记录网格id
+        # Divide rotation angles [0,1] into several regions, reachable tilings in each region, currently dividing angles into 120 intervals, each representing 3 degrees (see space object)
+        self.vis_grids = tuple()  # Discrete grids in 360-degree visible area, 1 degree per discrete sector, each sector records grid id
         self.nearst_obs_pos = np.array([])
 
-        self.nearst_obs_gid = 0  # 距离最近障碍物tiling的id（此处采用occupancy grid方法，求与最近障碍物tiling的距离）
-        self.sur_gids: Tuple = tuple()  # 指定半径范围内的其他tiling的ids,指定半径使用scene对象的human_step_single数值
-        self.sur_obs_gids = []  # 指定半径范围内的障碍物tiling的ids
-        self.sur_bound_gids = []  # 指定半径范围内的障碍物边界tiling的ids（1个human step 范围内）
-        self.sur_occu_safe = True  # 周围1步内无遮挡则为true
+        self.nearst_obs_gid = 0  # Id of nearest obstacle tiling (using occupancy grid method to calculate distance to nearest obstacle tiling)
+        self.sur_gids: Tuple = tuple()  # Ids of other tilings within specified radius, specified radius uses human_step_single value of scene object
+        self.sur_obs_gids = []  # Ids of obstacle tilings within specified radius
+        self.sur_bound_gids = []  # Ids of obstacle boundary tilings within specified radius (within 1 human step)
+        self.sur_occu_safe = True  # True if no occlusion within 1 step around
 
     def calc_rays_vis_poly_intersects(self, pos: np.ndarray, fwds: np.ndarray):
         """
@@ -127,5 +127,5 @@ class Tiling:
                 if c_poly.covers(Point(pos)):
                     return cid
             else:
-                print('grid multi vis error', pos, self.cross_area)  # 主要问题是pos可能落在tiling的空白区域
+                print('grid multi vis error', pos, self.cross_area)  # Main issue is that pos may fall in blank area of tiling
                 return np.random.randint(len(self.cross_area))

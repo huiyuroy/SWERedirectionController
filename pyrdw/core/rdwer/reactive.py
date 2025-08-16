@@ -10,14 +10,14 @@ class NoRdwManager(BaseRdwManager):
     def __init__(self):
         super(NoRdwManager, self).__init__()
         self.rdw_type = 'No Rdw'
-        # 反应式重定向各类速度常量，索引0是静止时虚拟视角自转速度，索引1是静止-移动区分阈值，索引2是gc最大角速度变化量，索引3是gr最大角速度变化量
-        self.steer_static_rot = 4  # 经典Steer RDW算法的静止时场景自转角度
-        self.steer_vel_dt = 20  # 经典Steer RDW算法的行走检测阈限，默认0.2m/s区分用户是行走还是静止
+        # Reactive redirection velocity constants, index 0 is virtual view auto-rotation speed when static, index 1 is static-move distinction threshold, index 2 is gc maximum angular velocity change, index 3 is gr maximum angular velocity change
+        self.steer_static_rot = 4  # Static scene auto-rotation angle of classic Steer RDW algorithm
+        self.steer_vel_dt = 20  # Walking detection threshold of classic Steer RDW algorithm, default 0.2m/s to distinguish whether user is walking or static
         self.steer_rot_dt = 1.5  # in degree
-        self.steer_max_gc_rot = 15  # 经典Steer RDW算法能够应用的曲率增益旋转角上限
-        self.steer_max_gr_rot = 30  # 经典Steer RDW算法能够应用的旋转增益旋转角上限
-        self.steer_dampen_dis = 125  # 反应式重定向抑制项，距离抑制项
-        self.steer_dampen_ang = 45  # 反应式重定向抑制项，角度抑制项
+        self.steer_max_gc_rot = 15  # Upper limit of curvature gain rotation angle that classic Steer RDW algorithm can apply
+        self.steer_max_gr_rot = 30  # Upper limit of rotation gain rotation angle that classic Steer RDW algorithm can apply
+        self.steer_dampen_dis = 125  # Reactive redirection damping term, distance damping term
+        self.steer_dampen_ang = 45  # Reactive redirection damping term, angle damping term
         self.steer_force = np.array([0, 0])
         self.enable_rdw = False
 

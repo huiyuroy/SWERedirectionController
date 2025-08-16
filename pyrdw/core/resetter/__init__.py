@@ -11,9 +11,9 @@ class BaseResetter(BaseManager):
         self.reset_state = 0
         self.reset_angle = 0
         self.reset_scale = 1
-        # 距离边界的最小距离，小于该距离触发reset
+        # Minimum distance to boundary, reset is triggered when less than this distance
         self.reset_trigger_t = 20
-        # 结束reset状态的最小角度误差，当前实际方向与目标方向小于该值时终止reset
+        # Minimum angular error to end reset state, reset terminates when current actual direction and target direction are less than this value
         self.reset_terminal_t = 1
         self.reset_pred_t = 40
         self.reset_target_fwd = None
@@ -66,26 +66,14 @@ class BaseResetter(BaseManager):
                 self.reset_state = 0
             else:
                 nx_p_loc = self.p_loc + geo.norm_vec(self.p_fwd) * self.reset_pred_t * 2
-
-                if (self.p_vel > 0  # 判断移动时，是否安全
+                if (self.p_vel > 0  # Check if movement is safe
                         and (not self.p_scene.poly_contour_safe.covers(Point(nx_p_loc))
                              or not self.p_scene.poly_contour.covers(LineString([self.p_loc, nx_p_loc])))):
                     self.reset_num += 1
                     self.reset_state = 1
                 else:
                     self.reset_state = 0
-            # tiling = self.agent.p_cur_tiling
-            # if tiling.type and (tiling.sur_occu_safe or self.p_scene.poly_contour_safe.covers(Point(self.p_loc))):
-            #     self.reset_state = 0
-            # else:
-            #     nx_p_loc = self.p_loc + geo.norm_vec(self.p_fwd) * self.reset_pred_t * 2
-            #     if ((not self.p_scene.poly_contour_safe.covers(Point(nx_p_loc))
-            #          or not self.p_scene.poly_contour.covers(LineString((self.p_loc, nx_p_loc))))
-            #             and self.p_vel > 0):
-            #         self.reset_num += 1
-            #         self.reset_state = 1
-            #     else:
-            #         self.reset_state = 0
+
             return self.reset_state
 
     def start(self, **kwargs):
@@ -101,7 +89,7 @@ class BaseResetter(BaseManager):
     @abstractmethod
     def calc_reset_target_fwd(self):
         """
-        用于在启动重置时计算重置目标方向，自己的重置方法需要对这个进行重写
+        Used to calculate reset target direction when starting reset, own reset methods need to override this
 
         Returns:
             None

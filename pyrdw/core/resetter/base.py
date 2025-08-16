@@ -4,9 +4,6 @@ from pyrdw.core.resetter import *
 
 
 class Turn21Resetter(BaseResetter):
-    """
-    优化后的Turn21重置，当其重置方向依然与边界碰撞时，将执行区域中心重置，四种方式中次优
-    """
 
     def __init__(self):
         super().__init__()
@@ -71,39 +68,6 @@ class TurnModifiedCenterResetter(BaseResetter):
                 self.reset_target_fwd = tar_fwd
             else:
                 self.reset_target_fwd = geo.rot_vecs(self.p_fwd, PI)
-
-            # inter, dis, bound = geo.calc_ray_poly_intersection_bound(self.p_loc, potential_fwd, self.p_scene.bounds)
-            # bs, be = bound
-            # potential_f1 = geo.norm_vec(be - bs)
-            # potential_f2 = -potential_f1
-            # pot_end1 = self.p_loc + potential_f1
-            # pot_end2 = self.p_loc + potential_f2
-            # if alg.l2_norm(pot_end2 - self.p_center) > alg.l2_norm(pot_end1 - self.p_center):
-            #     self.reset_target_fwd = potential_f1
-            # else:
-            #     self.reset_target_fwd = potential_f2
-            #
-            # cur_reset_fwd = geo.norm_vec(self.reset_target_fwd)
-            # nx_pot_loc = self.p_loc + cur_reset_fwd * self.reset_pred_t
-            #
-            # pot_rot_range1 = copy.copy(self.pot_rot_range1)
-            # pot_rot_range2 = copy.copy(self.pot_rot_range2)
-            #
-            # while not self.p_scene.poly_contour_safe.covers(Point(nx_pot_loc)):
-            #     pot_rot1 = pot_rot_range1.pop()
-            #     pot_rot2 = pot_rot_range2.pop()
-            #     pot_reset_fwd1 = geo.rot_vecs(cur_reset_fwd, pot_rot1)
-            #     pot_reset_fwd2 = geo.rot_vecs(cur_reset_fwd, pot_rot2)
-            #     pot_reset_end1 = self.p_loc + pot_reset_fwd1
-            #     pot_reset_end2 = self.p_loc + pot_reset_fwd2
-            #     if alg.l2_norm(pot_reset_end2 - self.p_center) > alg.l2_norm(pot_reset_end1 - self.p_center):
-            #         cur_reset_fwd = pot_reset_fwd1
-            #     else:
-            #         cur_reset_fwd = pot_reset_fwd2
-            #     nx_pot_loc = self.p_loc + cur_reset_fwd * self.reset_pred_t
-            #
-            #
-            #     self.reset_target_fwd = cur_reset_fwd
         else:
             self.reset_target_fwd = potential_fwd
 

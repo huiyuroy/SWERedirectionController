@@ -1,3 +1,4 @@
+
 from pyrdw.core import *
 
 
@@ -10,7 +11,7 @@ class BaseInputer(BaseManager):
         self.time_reset_counter = 0
         self.move_counter = 1
         self.time_range = 1
-        # 模拟用户的初始状态，前两位-位置，后两位-朝向
+        # Initial state of simulated user, first two - position, last two - orientation
         self.init_p_state = [0, 0, 0, 0]
         self.init_v_state = [0, 0, 0, 0]
         self.reset_state = None
@@ -46,31 +47,31 @@ class BaseInputer(BaseManager):
 
 class SimuTrajectoryInputer(BaseInputer):
     """
-    模拟在指定路径上行走，模拟用户行动时，尽可能加速到预定最大速度（行走速度、转向速度）上行动
+    Simulate walking on a specified trajectory, when simulating user actions, try to accelerate to the predetermined maximum speed (walking speed, rotation speed)
     """
 
     def __init__(self):
         super().__init__()
-        # 模拟用户移动速度的范围[min,max], 模拟用户旋转速度的范围[min,max]
+        # Range of simulated user movement speed [min,max], range of simulated user rotation speed [min,max]
         self.mv_vel_range, self.rot_vel_range = [0, 0], [0, 0]
-        # 模拟用户的默认行走速度[0]和旋转速度[1]
+        # Default walking speed [0] and rotation speed [1] of simulated user
         self.norm_phy_vels = [0, 0]
-        # 模拟用户在虚拟空间与虚拟目标的最小距离[0]和角度朝向[1]，都小于给定值时，认为用户已经到达虚拟目标位置，可进行下一次目标选择
+        # Minimum distance [0] and angular orientation [1] between simulated user in virtual space and virtual target, when both are less than the given value, it is considered that the user has reached the virtual target position and can proceed to the next target selection
         self.end_motion_thr = [0, 0]
-        # 模拟用户当前速度，[0]是行走速度，[1]是旋转速度(+/-表示旋转方向)
+        # Current speed of simulated user, [0] is walking speed, [1] is rotation speed (+/- indicates rotation direction)
         self.cur_phy_vels = [0, 0]
-        self.mv_acc = 0  # 行走加速度
-        self.mr_acc = 0  # 转向加速度
-        self.acc_rate = 0.25  # 4帧加速到最大速度
-        self.predict_frame = 4  # 预测4帧后的状态
-        # 模拟用户当前对应的虚拟目标，包括目标位置，目标朝向
+        self.mv_acc = 0  # Walking acceleration
+        self.mr_acc = 0  # Rotation acceleration
+        self.acc_rate = 0.25  # Accelerate to maximum speed in 4 frames
+        self.predict_frame = 4  # Predict state after 4 frames
+        # Current virtual target corresponding to simulated user, including target position and target orientation
         self.vir_tar_loc = np.array([0, 0])
         self.vir_tar_fwd = np.array([0, 0])
-        # 模拟用户是否在距离[0]和朝向[1]上到达当前指定虚拟目标，其中朝向指用户正方向与其和虚拟目标间方向是否配准
+        # Whether simulated user reaches current specified virtual target in terms of distance [0] and orientation [1], where orientation refers to whether the user's forward direction is aligned with the direction between the user and the virtual target
         self.tar_done = [False, False]
-        # 记录模拟用户当前虚拟状态与目标状态间的偏差度，[0][1]当前距离和方向偏差度，[2][3]前一帧偏差度
+        # Record the deviation degree between current virtual state and target state of simulated user, [0][1] current distance and direction deviation degree, [2][3] deviation degree of previous frame
         self.v_offset2tar = [0, 0, 0, 0]
-        # 随机选择物理空间起点
+        # Randomly select physical space starting point
         self.rand_init_p_state = True
         self.cur_traj = None
         self.cur_tars = np.zeros((10, 2))
@@ -120,9 +121,9 @@ class SimuTrajectoryInputer(BaseInputer):
 
     def reset(self):
         """
-        以指定record路径重置walker,每次重置后选择下一条路径链
+        Reset walker with specified record path, select next path chain after each reset
 
-        Returns: 初始状态
+        Returns: Initial state
         """
         self.mv_acc = self.mv_vel_range[1] * self.acc_rate
         self.mr_acc = self.rot_vel_range[1] * self.acc_rate
@@ -156,12 +157,12 @@ class SimuTrajectoryInputer(BaseInputer):
             self.walk_finished = True
             return p_loc, p_fwd, self.vir_tar_loc, self.vir_tar_fwd, self.walk_finished
 
-        if not self.agent.resetter.reset_state:  # 不在reset
+        if not self.agent.resetter.reset_state:  # Not in reset
             self.reset_state = self.agent.resetter.reset_state
             self.time_reset_counter = 0
             abs_fwd2tar = abs(self.v_offset2tar[1])
-            if self.tar_done[1]:  # 完成了朝向配准
-                if self.v_offset2tar[0] <= self.end_motion_thr[0]:  # 完成朝向配准加位置配准，此时选择下一个目标位置
+            if self.tar_done[1]:  # Orientation alignment completed
+                if self.v_offset2tar[0] <= self.end_motion_thr[0]:  # Orientation alignment plus position alignment completed, select next target position
                     self.cur_tar_idx += 1
                     self.vir_tar_loc = self.cur_tars[self.cur_tar_idx][:2]
                     self.vir_tar_fwd = self.vir_tar_loc - v_loc
@@ -171,13 +172,13 @@ class SimuTrajectoryInputer(BaseInputer):
                 elif math.sin(abs_fwd2tar) * alg.l2_norm(self.vir_tar_fwd) > self.end_motion_thr[0]:
                     self.tar_done[1] = False
                     self.cur_phy_vels = [0, 0]
-                else:  # 没完成位置配准，还需让用户再向前走
+                else:  # Position alignment not completed, need to let user move forward
                     mv = self.cur_phy_vels[0] + self.mv_acc
                     self.cur_phy_vels = [alg.clamp(mv, 0, max_mv),
                                          geo.calc_angle_bet_vec(v_fwd, vp_fwd) * self.delta_time]
                     if self.cur_phy_vels[0] * self.time_step > self.v_offset2tar[0]:
                         self.cur_phy_vels[0] = alg.clamp(self.v_offset2tar[0] * self.delta_time, 0, max_mv)
-            else:  # 没完成位置配准，还需让用户调整朝向
+            else:  # Position alignment not completed, need to let user adjust orientation
                 self.cur_phy_vels[0] = 0
                 if abs_fwd2tar > self.end_motion_thr[1]:
                     mr = self.cur_phy_vels[1] + alg.sign(self.v_offset2tar[1]) * self.mr_acc
@@ -191,10 +192,10 @@ class SimuTrajectoryInputer(BaseInputer):
                     self.cur_phy_vels[1] = self.v_offset2tar[1] * self.delta_time * 0.5
             p_next_fwd = geo.norm_vec(geo.rot_vecs(p_fwd, self.cur_phy_vels[1] * self.time_step))
             p_next_loc = p_loc + p_next_fwd * (self.cur_phy_vels[0] * self.time_step)
-        else:  # 需要进行reset
+        else:  # Need to perform reset
             expected_dir = 1 if self.agent.resetter.reset_rest_angle > 0 else -1
             self.tar_done = [False, False]
-            self.cur_phy_vels = [0, expected_dir * max_rv * 2]  # 如果重置则旋转速度是普通速度的二倍
+            self.cur_phy_vels = [0, expected_dir * max_rv * 2]  # If resetting, rotation speed is twice the normal speed
             abs_reset = abs(self.agent.resetter.reset_rest_angle)
             if abs_reset <= abs(self.agent.resetter.reset_angle * 0.1) or abs_reset < 5 * DEG2RAD:
                 self.cur_phy_vels[1] = expected_dir * abs(self.agent.resetter.reset_rest_angle * self.delta_time)
@@ -224,10 +225,10 @@ class LiveInputer(SimuTrajectoryInputer):
 
     def reset(self):
         """
-               以指定record路径重置walker,每次重置后选择下一条路径链
+            Reset walker with specified record path, select next path chain after each reset
 
-               Returns: 初始状态
-               """
+            Returns: Initial state
+        """
 
         self.v_loc = np.array(self.init_v_state[:2])
         self.v_fwd = np.array(self.init_v_state[2:4])

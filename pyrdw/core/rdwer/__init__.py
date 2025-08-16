@@ -33,13 +33,13 @@ class BaseRdwManager(BaseManager):
         Decompose phy vel vector v_vel, one part is following current phy head forward (self.p_fwd) v_fwd,
         other v_ver is vertical to v_fwd.
 
-        实现物理空间速度向量的正交分解，用于分析物体前向和横向运动
+        Implement orthogonal decomposition of velocity vector in physical space to analyze forward and lateral motion of objects
 
         Returns:
             - p_fwd_vec (normalized),
             - p_fwd_vel,
-            p_right_vec (normalized),
-            p_right_vel
+            - p_right_vec (normalized),
+            - p_right_vel
         """
         p_fwd_vec = geo.norm_vec(self.p_fwd)
         p_fwd_vel = np.dot(p_fwd_vec, self.p_vel_vec)
